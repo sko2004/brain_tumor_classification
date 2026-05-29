@@ -1,6 +1,6 @@
-# 🧠 Brain Tumor MRI Classification with Grad-CAM
+# Brain Tumor MRI Classification with Grad-CAM
 
-> ⚠️ **Research & Educational Use Only** — Not for clinical diagnosis.
+>  **Research & Educational Use Only** — Not for clinical diagnosis.
 
 ## Project Structure
 
@@ -17,22 +17,26 @@
 ## Quick Start
 
 ### 1. Install dependencies
+
 ```bash
 pip install -r requirements.txt
 ```
 
 ### 2. Download dataset (Kaggle)
+
 ```bash
 # Place ~/.kaggle/kaggle.json first, then:
 kaggle datasets download -d masoudnickparvar/brain-tumor-mri-dataset --unzip -p ./brain_tumor_dataset
 ```
 
 ### 3. Run the Jupyter Notebook (full training)
+
 ```bash
 jupyter notebook brain_tumor_classification.ipynb
 ```
 
 ### 4. Launch Streamlit App
+
 ```bash
 streamlit run app.py
 # → http://localhost:8501
@@ -41,23 +45,25 @@ streamlit run app.py
 ## Cloud Deployment
 
 ### Streamlit Community Cloud (free)
+
 1. Push to GitHub
 2. Go to share.streamlit.io → New App
 3. Set main file: `app.py`
 4. Deploy
 
 ### Hugging Face Spaces
+
 1. Create Space with Streamlit SDK
 2. Upload `app.py` + `requirements.txt`
 
 ## Architecture Overview
 
-| Model | Params | Strategy | Best Use |
-|-------|--------|----------|----------|
-| Baseline CNN | 0.5M | From scratch | Baseline reference |
-| ResNet50 | 25.6M | Transfer (ImageNet) | Max accuracy |
-| EfficientNetB0 | 5.3M | Transfer (ImageNet) | Best acc/param ratio |
-| MobileNetV2 | 3.4M | Transfer (ImageNet) | Edge deployment |
+| Model          | Params | Strategy            | Best Use             |
+| -------------- | ------ | ------------------- | -------------------- |
+| Baseline CNN   | 0.5M   | From scratch        | Baseline reference   |
+| ResNet50       | 25.6M  | Transfer (ImageNet) | Max accuracy         |
+| EfficientNetB0 | 5.3M   | Transfer (ImageNet) | Best acc/param ratio |
+| MobileNetV2    | 3.4M   | Transfer (ImageNet) | Edge deployment      |
 
 ## Notebook Sections (19 total)
 
@@ -83,14 +89,14 @@ streamlit run app.py
 
 ## Streamlit App Features
 
-- 📤 Upload any brain MRI (JPG/PNG)
-- 🔮 Real-time 4-class prediction
-- 🔥 Interactive Grad-CAM heatmap with opacity slider
-- 📊 Probability charts with MC Dropout error bars
-- 🎲 Uncertainty estimation with clinical review flag
-- 🏆 Model selector (switch architectures live)
-- 📊 Full benchmark comparison dashboard
-- 📚 Methods & clinical context documentation
+- Upload any brain MRI (JPG/PNG)
+- Real-time 4-class prediction
+- Interactive Grad-CAM heatmap with opacity slider
+- Probability charts with MC Dropout error bars
+- Uncertainty estimation with clinical review flag
+- Model selector (switch architectures live)
+- Full benchmark comparison dashboard
+- Methods & clinical context documentation
 
 ## References
 
