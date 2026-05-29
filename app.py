@@ -445,8 +445,10 @@ def synthetic_gradcam(image: np.ndarray, pred_class: int, confidence: float) -> 
     Generate a plausible synthetic Grad-CAM heatmap for demo mode.
     Uses image intensity to simulate where a model might attend.
     """
-    gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY).astype(np.float32) / 255.0
-    size = gray.shape[0]
+    # Resize to standard square size (IMG_SIZE = 224) to handle non-square uploaded images
+    resized = cv2.resize(image, (IMG_SIZE, IMG_SIZE))
+    gray = cv2.cvtColor(resized, cv2.COLOR_BGR2GRAY).astype(np.float32) / 255.0
+    size = IMG_SIZE
 
     # High-intensity regions (simulates where model focuses)
     threshold = np.percentile(gray, 70)
@@ -476,6 +478,9 @@ def synthetic_gradcam(image: np.ndarray, pred_class: int, confidence: float) -> 
 
 def overlay_heatmap(image: np.ndarray, cam: np.ndarray, alpha: float = 0.5) -> np.ndarray:
     """Blend Grad-CAM heatmap with original image."""
+    # Ensure cam has the exact same spatial dimensions as the input image
+    if cam.shape[:2] != image.shape[:2]:
+        cam = cv2.resize(cam, (image.shape[1], image.shape[0]))
     cam_uint8 = (cam * 255).astype(np.uint8)
     heatmap = cv2.applyColorMap(cam_uint8, cv2.COLORMAP_JET)
     img_uint8 = (image * 255).astype(np.uint8) if image.dtype != np.uint8 else image.copy()
